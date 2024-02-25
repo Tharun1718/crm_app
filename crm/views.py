@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+
 from .models import Customer
 from .forms import CustomerForm
 
-# Create your views here.
+
 def index(request):
     return render(request, 'crm/index.html',{
         'customers': Customer.objects.all()
@@ -34,12 +35,14 @@ def add(request):
             address = new_address
         )
         new_customer.save()
-        return render(request, 'crm\add.html', {
+        return render(request, 'crm/add.html', {
             'form': CustomerForm(),
             'success': True
         })
     else:
         form = CustomerForm()
-    return render(request, 'crm\add.html',{
+    return render(request, 'crm/add.html',{
         'form': CustomerForm()
     })
+
+
